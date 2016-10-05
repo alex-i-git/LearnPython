@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-#version 0.1
+# version 0.1
+# Добавляем функцию подсчета слов
+# Usage: /wcount word1 word2 ...
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -24,12 +26,17 @@ def talk_to_me(bot, update):
     user_input = (((update.message.text).lower()).rstrip()).lstrip()
     bot.sendMessage(update.message.chat_id, get_answer(user_input,dialog))
     
+def word_count(bot,update,args):
+	count = str(len(args))
+	bot.sendMessage(update.message.chat_id, "В фразе " + count + " слов")
+	
 def run_bot():
     
     updater = Updater("195034229:AAG8LDc4Q-O0NL991wza6ovbwQKVZ1zT2Rk")
 
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("wcount", word_count,pass_args=True))
     dp.add_handler(MessageHandler([Filters.text], talk_to_me))
 
     updater.start_polling() # опрашивает telegram на наличие сообщений
