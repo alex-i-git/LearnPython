@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+#version 0.1
+
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 #Updater - связь с telegram
