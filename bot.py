@@ -13,9 +13,16 @@ def start(bot, update):	# Пишет в консоль о вызове стар�
 	print("Вызван /start")
 	bot.sendMessage(update.message.chat_id, text="Привет, человек! Я бот, который помогает")
 
+def get_answer(user_key,user_dict):
+	return user_dict[user_key]	
+
+dialog={"привет": "И тебе привет!", "как дела": "Лучше всех", "пока": "Увидимся", 
+"добрый день":"здравствуйте"}
+
 def talk_to_me(bot, update):
-    print('Пришло сообщение: %s' % update.message.text)
-    bot.sendMessage(update.message.chat_id, update.message.text)
+    #print('Пришло сообщение: %s' % update.message.text)
+    user_input = (((update.message.text).lower()).rstrip()).lstrip()
+    bot.sendMessage(update.message.chat_id, get_answer(user_input,dialog))
     
 def run_bot():
     
