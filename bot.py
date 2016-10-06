@@ -38,6 +38,9 @@ def division(a,b):
 # Функция для арифметических действий с проверкой деления на 0
 # Предполагает, что операторов только 2 и все символы разделены пробелом
 def calc(bot,update,args):
+	if len(args) == 0:
+		bot.sendMessage(update.message.chat_id, "Usage: /calc arg1 operation arg2 =")
+	
 	a = float(args[0])
 	b = float(args[2])
 	if str(args[1]) == '+':
@@ -49,7 +52,6 @@ def calc(bot,update,args):
 	elif str(args[1]) == '/':
 			c = division(a,b)
 
-	#if args[-1] == '=':
 	bot.sendMessage(update.message.chat_id, c)
 	
 
