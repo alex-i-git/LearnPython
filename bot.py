@@ -29,14 +29,38 @@ def talk_to_me(bot, update):
 def word_count(bot,update,args):
 	count = str(len(args))
 	bot.sendMessage(update.message.chat_id, "В фразе " + count + " слов")
+
+def division(a,b):
+	try:
+		return a/b
+	except ZeroDivisionError:
+		return "Division by zero"
+# Функция для арифметических действий с проверкой деления на 0
+# Предполагает, что операторов только 2 и все символы разделены пробелом
+def calc(bot,update,args):
+	a = float(args[0])
+	b = float(args[2])
+	if str(args[1]) == '+':
+		c = a+b
+	elif str(args[1]) == '-':
+			c = a-b
+	elif str(args[1]) == '*':
+			c = a*b
+	elif str(args[1]) == '/':
+			c = division(a,b)
+
+	#if args[-1] == '=':
+	bot.sendMessage(update.message.chat_id, c)
 	
+
 def run_bot():
     
     updater = Updater("195034229:AAG8LDc4Q-O0NL991wza6ovbwQKVZ1zT2Rk")
 
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("wcount", word_count,pass_args=True))
+    dp.add_handler(CommandHandler("wcount", word_count, pass_args=True))
+    dp.add_handler(CommandHandler("calc", calc, pass_args=True))
     dp.add_handler(MessageHandler([Filters.text], talk_to_me))
 
     updater.start_polling() # опрашивает telegram на наличие сообщений
