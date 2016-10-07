@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 # version 0.1
+
 # Добавляем функцию подсчета слов
 # Usage: /wcount word1 word2 ...
 
