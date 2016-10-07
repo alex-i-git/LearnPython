@@ -57,6 +57,27 @@ def calc(bot,update,args):
 
 	bot.sendMessage(update.message.chat_id, c)
 	
+def wicalc(bot,update,args):
+	nums = {"один":1, "два":2, "три":3, "четыре":4, "пять":5, "шесть":6, "семь":7, "восемь":8, "девять":9, "десять":10}
+	operations = ["минус", "плюс", "умножить", "разделить"]
+	l=list()
+	for i in args:
+		if i in nums.keys():
+			l.append(nums[i])
+		if i in operations:
+			math_operation = i
+	
+	if math_operation == "минус":
+		result = l[0]-l[1]
+	elif math_operation == "плюс":
+		result = l[0]+l[1]
+	elif math_operation == "умножить":
+		result = l[0]*l[1]
+	elif math_operation == "разделить":
+		result = division(l[0],l[1])
+	
+	bot.sendMessage(update.message.chat_id, result)
+
 
 def run_bot():
     
@@ -66,6 +87,7 @@ def run_bot():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("wcount", word_count, pass_args=True))
     dp.add_handler(CommandHandler("calc", calc, pass_args=True))
+    dp.add_handler(CommandHandler("wicalc", wicalc, pass_args=True))
     dp.add_handler(MessageHandler([Filters.text], talk_to_me))
 
     updater.start_polling() # опрашивает telegram на наличие сообщений
