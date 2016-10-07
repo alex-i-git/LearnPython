@@ -40,6 +40,9 @@ def division(a,b):
 def calc(bot,update,args):
 	if len(args) == 0:
 		bot.sendMessage(update.message.chat_id, "Usage: /calc arg1 operation arg2 =")
+
+	if len(args) == 1:
+		bot.sendMessage(update.message.chat_id, "Usage: /calc arg1 operation arg2 =")
 	
 	a = float(args[0])
 	b = float(args[2])
