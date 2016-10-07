@@ -40,9 +40,6 @@ def division(a,b):
 def calc(bot,update,args):
 	if len(args) == 0:
 		bot.sendMessage(update.message.chat_id, "Usage: /calc arg1 operation arg2 =")
-
-	if len(args) == 1:
-		bot.sendMessage(update.message.chat_id, "Usage: /calc arg1 operation arg2 =")
 	
 	a = float(args[0])
 	b = float(args[2])
@@ -80,7 +77,6 @@ def wicalc(bot,update,args):
 	
 	bot.sendMessage(update.message.chat_id, result)
 
-
 def run_bot():
     
     updater = Updater("195034229:AAG8LDc4Q-O0NL991wza6ovbwQKVZ1zT2Rk")
@@ -89,7 +85,6 @@ def run_bot():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("wcount", word_count, pass_args=True))
     dp.add_handler(CommandHandler("calc", calc, pass_args=True))
-    dp.add_handler(CommandHandler("wicalc", wicalc, pass_args=True))
     dp.add_handler(MessageHandler([Filters.text], talk_to_me))
 
     updater.start_polling() # опрашивает telegram на наличие сообщений
