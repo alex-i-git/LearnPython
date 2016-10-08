@@ -6,6 +6,7 @@
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
+
 #Updater - связь с telegram
 #CommandHandler - обработчик команд
 #MessageHandler - обработчик сообщений
@@ -86,7 +87,7 @@ def run_bot():
     dp.add_handler(CommandHandler("wcount", word_count, pass_args=True))
     dp.add_handler(CommandHandler("calc", calc, pass_args=True))
     dp.add_handler(MessageHandler([Filters.text], talk_to_me))
-
+    dp.add_handler(CommandHandler("wicalc", wicalc, pass_args=True))
     updater.start_polling() # опрашивает telegram на наличие сообщений
     updater.idle()
 
