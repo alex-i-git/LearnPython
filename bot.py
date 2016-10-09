@@ -5,7 +5,8 @@
 # Usage: /wcount word1 word2 ...
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-
+from datetime import date, datetime
+import ephem
 
 #Updater - связь с telegram
 #CommandHandler - обработчик команд
@@ -78,6 +79,20 @@ def wicalc(bot,update,args):
 	
 	bot.sendMessage(update.message.chat_id, result)
 
+def fullmoon(bot,update,args):
+	bot.sendMessage(update.message.chat_id, str(ephem.next_full_moon(args[-1])))
+
+def hmdays(bot,update,args):
+	ng = datetime(2017,1,1)
+	now = datetime.now()
+	num = {1:"день", 2:"дня", 3: "дня", 4: "дня", 5: "дней", 6: "дней", 7: "дней", 8: "дней", 9: "дней", 0: "дней"}
+	days = ((str(ng - now)).split())[0]
+	i=days[-1]
+	if int(i) in num.keys():
+		quantity = str(num[int(i)])
+	print(quantity)
+	bot.sendMessage(update.message.chat_id, days + ' ' + quantity)
+
 def run_bot():
     
     updater = Updater("195034229:AAG8LDc4Q-O0NL991wza6ovbwQKVZ1zT2Rk")
@@ -88,6 +103,8 @@ def run_bot():
     dp.add_handler(CommandHandler("calc", calc, pass_args=True))
     dp.add_handler(MessageHandler([Filters.text], talk_to_me))
     dp.add_handler(CommandHandler("wicalc", wicalc, pass_args=True))
+    dp.add_handler(CommandHandler("fullmoon", fullmoon, pass_args=True))
+    dp.add_handler(CommandHandler("hmdays", hmdays, pass_args=True))
     updater.start_polling() # опрашивает telegram на наличие сообщений
     updater.idle()
 
