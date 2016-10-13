@@ -100,7 +100,7 @@ def hmdays(bot,update,args):
 
 def logger(log_data):
 	log_file = 'bot.log'
-	now=datetime.now()
+	now=datetime.now().strftime('%d-%m-%Y %H:%m:%S')
 	with open(log_file, 'a', encoding='utf-8') as f:
 		f.write(str(now) + ' ' + log_data)
 		f.write('\n')
