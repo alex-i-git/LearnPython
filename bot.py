@@ -80,11 +80,14 @@ def wicalc(bot,update,args):
 	bot.sendMessage(update.message.chat_id, result)
 
 def fullmoon(bot,update,args):
+	logger(update.message.text)
 	bot.sendMessage(update.message.chat_id, str(ephem.next_full_moon(args[-1])))
+	logger(str(ephem.next_full_moon(args[-1])))
 
 def hmdays(bot,update,args):
 	ng = datetime(2017,1,1)
 	now = datetime.now()
+	logger(update.message.text)
 	num = {1:"день", 2:"дня", 3: "дня", 4: "дня", 5: "дней", 6: "дней", 7: "дней", 8: "дней", 9: "дней", 0: "дней"}
 	days = ((str(ng - now)).split())[0]
 	i=days[-1]
@@ -92,11 +95,15 @@ def hmdays(bot,update,args):
 		quantity = str(num[int(i)])
 	print(quantity)
 	bot.sendMessage(update.message.chat_id, days + ' ' + quantity)
+	log_data = days + ' ' + quantity
+	logger(log_data)
 
 def logger(log_data):
 	log_file = 'bot.log'
+	now=datetime.now()
 	with open(log_file, 'a', encoding='utf-8') as f:
-		f.write(log_data)
+		f.write(str(now) + ' ' + log_data)
+		f.write('\n')
 		f.close()
 	
 
