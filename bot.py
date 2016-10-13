@@ -93,6 +93,13 @@ def hmdays(bot,update,args):
 	print(quantity)
 	bot.sendMessage(update.message.chat_id, days + ' ' + quantity)
 
+def logger(log_data):
+	log_file = 'bot.log'
+	with open(log_file, 'a', encoding='utf-8') as f:
+		f.write(log_data)
+		f.close()
+	
+
 def run_bot():
     
     updater = Updater("195034229:AAG8LDc4Q-O0NL991wza6ovbwQKVZ1zT2Rk")
